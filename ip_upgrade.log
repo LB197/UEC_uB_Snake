@@ -1,0 +1,240 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Mon Jul 29 18:02:15 2019
+| Host         : Dell running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7a35tcpg236-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'microblaze_vga_drawrect_0_0'
+
+1. Summary
+----------
+
+CAUTION (success, with warnings) in the upgrade of microblaze_vga_drawrect_0_0 (xilinx.com:user:vga_drawrect:1.0) from (Rev. 13) to (Rev. 14)
+
+After upgrade, an IP may have parameter and port differences compared to the original customization. Please review the parameters within the IP customization GUI to ensure proper functionality. Also, please review the updated IP instantiation template to ensure proper connectivity, and update your design if required.
+
+2. Connection Warnings
+----------------------
+
+Detected external port differences while upgrading 'microblaze_vga_drawrect_0_0'. These changes may impact your design.
+
+
+-Upgrade has removed port 'led'
+
+-Upgrade has removed port 'sw'
+
+
+
+
+
+
+
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Mon Jul 29 16:48:14 2019
+| Host         : Dell running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7a35tcpg236-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'microblaze_vga_drawrect_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of microblaze_vga_drawrect_0_0 (xilinx.com:user:vga_drawrect:1.0) from (Rev. 12) to (Rev. 13)
+
+
+
+
+
+
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Mon Jul 29 16:03:11 2019
+| Host         : Dell running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7a35tcpg236-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'microblaze_vga_drawrect_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of microblaze_vga_drawrect_0_0 (xilinx.com:user:vga_drawrect:1.0) from (Rev. 11) to (Rev. 12)
+
+
+
+
+
+
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Mon Jul 29 15:31:06 2019
+| Host         : Dell running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7a35tcpg236-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'microblaze_vga_drawrect_0_0'
+
+1. Summary
+----------
+
+CAUTION (success, with warnings) in the upgrade of microblaze_vga_drawrect_0_0 (xilinx.com:user:vga_drawrect:1.0) from (Rev. 10) to (Rev. 11)
+
+After upgrade, an IP may have parameter and port differences compared to the original customization. Please review the parameters within the IP customization GUI to ensure proper functionality. Also, please review the updated IP instantiation template to ensure proper connectivity, and update your design if required.
+
+2. Connection Warnings
+----------------------
+
+Detected external port differences while upgrading 'microblaze_vga_drawrect_0_0'. These changes may impact your design.
+
+
+-Upgrade has added port 'sw'
+
+
+
+
+
+
+
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Mon Jul 29 14:36:43 2019
+| Host         : Dell running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7a35tcpg236-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'microblaze_vga_drawrect_0_0'
+
+1. Summary
+----------
+
+CAUTION (success, with warnings) in the upgrade of microblaze_vga_drawrect_0_0 (xilinx.com:user:vga_drawrect:1.0) from (Rev. 9) to (Rev. 10)
+
+After upgrade, an IP may have parameter and port differences compared to the original customization. Please review the parameters within the IP customization GUI to ensure proper functionality. Also, please review the updated IP instantiation template to ensure proper connectivity, and update your design if required.
+
+2. Connection Warnings
+----------------------
+
+Detected external port differences while upgrading 'microblaze_vga_drawrect_0_0'. These changes may impact your design.
+
+
+-Upgrade has added port 'led'
+
+
+
+
+
+
+
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Mon Jul 29 11:42:00 2019
+| Host         : Dell running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7a35tcpg236-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'microblaze_vga_background_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of microblaze_vga_background_0_0 (xilinx.com:user:vga_background:1.0) from (Rev. 11) to (Rev. 12)
+
+
+
+
+
+
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Mon Jul 29 11:26:35 2019
+| Host         : Dell running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7a35tcpg236-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'microblaze_vga_background_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of microblaze_vga_background_0_0 (xilinx.com:user:vga_background:1.0) from (Rev. 10) to (Rev. 11)
+
+
+
+
+
+
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Mon Jul 29 01:05:54 2019
+| Host         : Dell running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7a35tcpg236-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'microblaze_vga_drawrect_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of microblaze_vga_drawrect_0_0 (xilinx.com:user:vga_drawrect:1.0) from (Rev. 8) to (Rev. 9)
+
+
+
+
+
+
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Mon Jul 29 00:51:06 2019
+| Host         : Dell running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7a35tcpg236-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'microblaze_vga_drawrect_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of microblaze_vga_drawrect_0_0 (xilinx.com:user:vga_drawrect:1.0) from (Rev. 7) to (Rev. 8)
+
+
+
+
+
+
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Sun Jul 28 23:37:16 2019
+| Host         : Dell running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7a35tcpg236-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'microblaze_vga_background_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of microblaze_vga_background_0_0 (xilinx.com:user:vga_background:1.0) from (Rev. 9) to (Rev. 10)
+
