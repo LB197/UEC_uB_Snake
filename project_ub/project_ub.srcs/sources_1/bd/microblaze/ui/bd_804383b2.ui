@@ -1,0 +1,73 @@
+{
+   ExpandedHierarchyInLayout: "",
+   guistr: "# # String gsaved with Nlview 6.8.5  2018-01-30 bk=1.4354 VDI=40 GEI=35 GUI=JA:1.6 non-TLS-threadsafe
+#  -string -flagsOSRD
+preplace port s_axi_aclk -pg 1 -y 400 -defaultsOSRD
+preplace port clk_40M -pg 1 -y 360 -defaultsOSRD
+preplace port S_AXI_DRAWRECT -pg 1 -y 220 -defaultsOSRD
+preplace port LMB_int -pg 1 -y 300 -defaultsOSRD
+preplace port S_AXI_CHAR_CTRL -pg 1 -y 140 -defaultsOSRD
+preplace port vs -pg 1 -y 160 -defaultsOSRD
+preplace port S_AXI_BG -pg 1 -y 340 -defaultsOSRD
+preplace port S_AXI_MOUSE_CTRL -pg 1 -y 60 -defaultsOSRD
+preplace port s_axi_aresetn -pg 1 -y 420 -defaultsOSRD
+preplace port ps2_data -pg 1 -y 280 -defaultsOSRD
+preplace port ps2_clk -pg 1 -y 260 -defaultsOSRD
+preplace port hs -pg 1 -y 180 -defaultsOSRD
+preplace port reset_40M -pg 1 -y 380 -defaultsOSRD
+preplace port S_AXI_TEXT_MEM -pg 1 -y 120 -defaultsOSRD
+preplace portBus b -pg 1 -y 240 -defaultsOSRD
+preplace portBus r -pg 1 -y 200 -defaultsOSRD
+preplace portBus g -pg 1 -y 220 -defaultsOSRD
+preplace inst mouse_controller_0 -pg 1 -lvl 4 -y 190 -defaultsOSRD
+preplace inst vga_background_0 -pg 1 -lvl 1 -y 380 -defaultsOSRD
+preplace inst vga_drawrect_0 -pg 1 -lvl 2 -y 350 -defaultsOSRD
+preplace inst vga_drawrect_char_0 -pg 1 -lvl 3 -y 280 -defaultsOSRD
+preplace netloc vga_drawrect_0_hcount_out 1 2 1 670
+preplace netloc vga_drawrect_0_b_out 1 2 1 780
+preplace netloc vga_background_0_hsync 1 1 1 330
+preplace netloc vga_drawrect_char_0_r_out 1 3 1 1150
+preplace netloc S_AXI_CHAR_CTRL_1 1 0 3 NJ 140 NJ 140 NJ
+preplace netloc vga_background_0_vsync 1 1 1 320
+preplace netloc vga_drawrect_char_0_b_out 1 3 1 1210
+preplace netloc vga_background_0_hcount 1 1 1 270
+preplace netloc vga_drawrect_char_0_hsync_out 1 3 1 1140
+preplace netloc mouse_controller_0_b_out 1 4 1 NJ
+preplace netloc mouse_controller_0_hsync_out 1 4 1 NJ
+preplace netloc vga_drawrect_char_0_vcount_out 1 3 1 1120
+preplace netloc microblaze_0_Clk 1 0 4 -30 200 370 150 710 30 1180J
+preplace netloc clk_wiz_1_clk_40MHz 1 0 4 -40 190 390 130 720 20 1190
+preplace netloc S_AXI_TEXT_MEM_1 1 0 3 NJ 120 NJ 120 NJ
+preplace netloc microblaze_0_axi_periph_M06_AXI 1 0 4 NJ 60 NJ 60 NJ 60 NJ
+preplace netloc microblaze_0_axi_periph_M03_AXI 1 0 1 NJ
+preplace netloc vga_background_0_hblnk 1 1 1 290
+preplace netloc vga_background_0_vcount 1 1 1 280
+preplace netloc vga_background_0_red 1 1 1 340
+preplace netloc vga_drawrect_0_r_out 1 2 1 760
+preplace netloc vga_background_0_blu 1 1 1 360
+preplace netloc mouse_controller_0_r_out 1 4 1 NJ
+preplace netloc vga_drawrect_char_0_hblnk_out 1 3 1 1130
+preplace netloc vga_drawrect_char_0_hcount_out 1 3 1 1110
+preplace netloc vga_drawrect_0_vsync_out 1 2 1 740
+preplace netloc mouse_controller_0_vsync_out 1 4 1 NJ
+preplace netloc vga_drawrect_char_0_g_out 1 3 1 1200
+preplace netloc vga_drawrect_char_0_vsync_out 1 3 1 1190
+preplace netloc vga_drawrect_0_vblnk_out 1 2 1 700
+preplace netloc vga_drawrect_0_hsync_out 1 2 1 750
+preplace netloc rst_clk_wiz_1_100M_peripheral_aresetn 1 0 4 -10 210 300 110 730 50 1160J
+preplace netloc S_AXI_DRAWRECT_1 1 0 2 NJ 220 NJ
+preplace netloc vga_drawrect_0_hblnk_out 1 2 1 690
+preplace netloc vga_drawrect_0_vcount_out 1 2 1 680
+preplace netloc vga_drawrect_0_g_out 1 2 1 770
+preplace netloc vga_background_0_grn 1 1 1 350
+preplace netloc mouse_controller_0_g_out 1 4 1 NJ
+preplace netloc Net 1 4 1 NJ
+preplace netloc Net1 1 4 1 NJ
+preplace netloc vga_drawrect_char_0_vblnk_out 1 3 1 1170
+preplace netloc mouse_controller_0_LMB_int 1 4 1 NJ
+preplace netloc reset_1 1 0 4 -20 240 380 160 670 40 1170
+preplace netloc vga_background_0_vblnk 1 1 1 310
+levelinfo -pg 1 -60 130 530 950 1360 1520 -top 0 -bot 940
+",
+}
+0
