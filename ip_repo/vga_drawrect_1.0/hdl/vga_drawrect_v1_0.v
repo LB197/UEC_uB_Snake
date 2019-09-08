@@ -4,7 +4,7 @@
 	module vga_drawrect_v1_0 #
 	(
 		// Users to add parameters here
-
+        parameter integer NUMBER_OF_RECTANGLES = 32,
 		// User parameters ends
 		// Do not modify the parameters beyond this line
 
@@ -65,7 +65,8 @@
 // Instantiation of Axi Bus Interface S00_AXI
 	vga_drawrect_v1_0_S00_AXI # ( 
 		.C_S_AXI_DATA_WIDTH(C_S00_AXI_DATA_WIDTH),
-		.C_S_AXI_ADDR_WIDTH(C_S00_AXI_ADDR_WIDTH)
+		.C_S_AXI_ADDR_WIDTH(C_S00_AXI_ADDR_WIDTH),
+		.NUMBER_OF_RECTANGLES(NUMBER_OF_RECTANGLES)
 	) vga_drawrect_v1_0_S00_AXI_inst (
         .clk_40M(clk_40M),
         .rst_40M(rst_40M),
@@ -111,7 +112,21 @@
 	);
 
 	// Add user logic here
-
+	
+    // function to calculate number of bits necessary to store the number
+    // (ceiling of base 2 logarithm)
+    function integer clog2(input integer number);
+        begin : calculation
+            integer number_tmp;
+            number_tmp = number;
+            clog2 = 0;
+            while (number_tmp)
+            begin
+                clog2  = clog2 + 1;
+                number_tmp = number_tmp >> 1;
+            end
+        end
+    endfunction
 	// User logic ends
 
 	endmodule

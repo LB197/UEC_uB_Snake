@@ -3,7 +3,7 @@
   <spirit:vendor>xilinx.com</spirit:vendor>
   <spirit:library>user</spirit:library>
   <spirit:name>vga_drawrect</spirit:name>
-  <spirit:version>1.0</spirit:version>
+  <spirit:version>1.1</spirit:version>
   <spirit:busInterfaces>
     <spirit:busInterface>
       <spirit:name>S00_AXI</spirit:name>
@@ -173,7 +173,7 @@
         </spirit:parameter>
         <spirit:parameter>
           <spirit:name>WIZ_NUM_REG</spirit:name>
-          <spirit:value spirit:format="long" spirit:id="BUSIFPARAM_VALUE.S00_AXI.WIZ_NUM_REG" spirit:minimum="4" spirit:maximum="512" spirit:rangeType="long">32</spirit:value>
+          <spirit:value spirit:format="long" spirit:id="BUSIFPARAM_VALUE.S00_AXI.WIZ_NUM_REG" spirit:minimum="4" spirit:maximum="512" spirit:rangeType="long">128</spirit:value>
         </spirit:parameter>
         <spirit:parameter>
           <spirit:name>SUPPORTS_NARROW_BURST</spirit:name>
@@ -266,7 +266,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>3c33b7e1</spirit:value>
+            <spirit:value>13dd0e5d</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -282,7 +282,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>73453eb1</spirit:value>
+            <spirit:value>13dd0e5d</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -296,7 +296,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>a3185a4a</spirit:value>
+            <spirit:value>48b0a023</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -310,7 +310,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>dda4df14</spirit:value>
+            <spirit:value>16741b4a</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -953,12 +953,24 @@
         <spirit:description>Width of S_AXI address bus</spirit:description>
         <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_S00_AXI_ADDR_WIDTH" spirit:order="4" spirit:rangeType="long">8</spirit:value>
       </spirit:modelParameter>
+      <spirit:modelParameter spirit:dataType="integer">
+        <spirit:name>NUMBER_OF_RECTANGLES</spirit:name>
+        <spirit:displayName>Number Of Rectangles</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.NUMBER_OF_RECTANGLES">32</spirit:value>
+      </spirit:modelParameter>
     </spirit:modelParameters>
   </spirit:model>
   <spirit:choices>
     <spirit:choice>
       <spirit:name>choice_list_6fc15197</spirit:name>
       <spirit:enumeration>32</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_96d47805</spirit:name>
+      <spirit:enumeration>32</spirit:enumeration>
+      <spirit:enumeration>64</spirit:enumeration>
+      <spirit:enumeration>128</spirit:enumeration>
+      <spirit:enumeration>256</spirit:enumeration>
     </spirit:choice>
     <spirit:choice>
       <spirit:name>choice_list_99ba8646</spirit:name>
@@ -980,19 +992,11 @@
     <spirit:fileSet>
       <spirit:name>xilinx_verilogsynthesis_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>src/image_rom_snakebody32.data</spirit:name>
+        <spirit:name>src/image_rom_apple32dark.data</spirit:name>
         <spirit:userFileType>data</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/vga_drawrect_v1_0_S00_AXI.v</spirit:name>
-        <spirit:fileType>verilogSource</spirit:fileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>src/image_rom_snakehdown32.data</spirit:name>
-        <spirit:userFileType>data</spirit:userFileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>src/image_rom_snakehup32.data</spirit:name>
+        <spirit:name>src/image_rom_dirt32.data</spirit:name>
         <spirit:userFileType>data</spirit:userFileType>
       </spirit:file>
       <spirit:file>
@@ -1000,7 +1004,23 @@
         <spirit:userFileType>data</spirit:userFileType>
       </spirit:file>
       <spirit:file>
+        <spirit:name>src/image_rom_apple32.data</spirit:name>
+        <spirit:userFileType>data</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>src/image_rom_grass32.data</spirit:name>
+        <spirit:userFileType>data</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/image_rom_snakebody32.data</spirit:name>
+        <spirit:userFileType>data</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/image_rom_snakehup32.data</spirit:name>
+        <spirit:userFileType>data</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/image_rom_snakehdown32.data</spirit:name>
         <spirit:userFileType>data</spirit:userFileType>
       </spirit:file>
       <spirit:file>
@@ -1008,36 +1028,28 @@
         <spirit:userFileType>data</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>src/image_rom_apple32.data</spirit:name>
-        <spirit:userFileType>data</spirit:userFileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>src/image_rom.v</spirit:name>
+        <spirit:name>hdl/vga_drawrect_v1_0_S00_AXI.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_4624c9ae</spirit:userFileType>
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/vga_drawrect_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_75d00efa</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_14871f97</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/image_rom.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+        <spirit:userFileType>CHECKSUM_c26962b7</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
       <spirit:name>xilinx_verilogbehavioralsimulation_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>hdl/vga_drawrect_v1_0_S00_AXI.v</spirit:name>
-        <spirit:fileType>verilogSource</spirit:fileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>src/image_rom_snakebody32.data</spirit:name>
+        <spirit:name>src/image_rom_apple32dark.data</spirit:name>
         <spirit:userFileType>data</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>src/image_rom_snakehdown32.data</spirit:name>
-        <spirit:userFileType>data</spirit:userFileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>src/image_rom_snakehup32.data</spirit:name>
+        <spirit:name>src/image_rom_dirt32.data</spirit:name>
         <spirit:userFileType>data</spirit:userFileType>
       </spirit:file>
       <spirit:file>
@@ -1045,7 +1057,23 @@
         <spirit:userFileType>data</spirit:userFileType>
       </spirit:file>
       <spirit:file>
+        <spirit:name>src/image_rom_apple32.data</spirit:name>
+        <spirit:userFileType>data</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>src/image_rom_grass32.data</spirit:name>
+        <spirit:userFileType>data</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/image_rom_snakebody32.data</spirit:name>
+        <spirit:userFileType>data</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/image_rom_snakehup32.data</spirit:name>
+        <spirit:userFileType>data</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/image_rom_snakehdown32.data</spirit:name>
         <spirit:userFileType>data</spirit:userFileType>
       </spirit:file>
       <spirit:file>
@@ -1053,15 +1081,15 @@
         <spirit:userFileType>data</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>src/image_rom_apple32.data</spirit:name>
-        <spirit:userFileType>data</spirit:userFileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>src/image_rom.v</spirit:name>
+        <spirit:name>hdl/vga_drawrect_v1_0_S00_AXI.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/vga_drawrect_v1_0.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/image_rom.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
     </spirit:fileSet>
@@ -1100,9 +1128,9 @@
     <spirit:fileSet>
       <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>xgui/vga_drawrect_v1_0.tcl</spirit:name>
+        <spirit:name>xgui/vga_drawrect_v1_1.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_dda4df14</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_16741b4a</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
@@ -1114,26 +1142,26 @@
       </spirit:file>
     </spirit:fileSet>
   </spirit:fileSets>
-  <spirit:description>Draw rectangle on VGA</spirit:description>
+  <spirit:description>Display rectangles on screen</spirit:description>
   <spirit:parameters>
     <spirit:parameter>
       <spirit:name>C_S00_AXI_DATA_WIDTH</spirit:name>
       <spirit:displayName>C S00 AXI DATA WIDTH</spirit:displayName>
       <spirit:description>Width of S_AXI data bus</spirit:description>
       <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_S00_AXI_DATA_WIDTH" spirit:choiceRef="choice_list_99ba8646" spirit:order="3">64</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.C_S00_AXI_DATA_WIDTH">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_S00_AXI_ADDR_WIDTH</spirit:name>
       <spirit:displayName>C S00 AXI ADDR WIDTH</spirit:displayName>
       <spirit:description>Width of S_AXI address bus</spirit:description>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_S00_AXI_ADDR_WIDTH" spirit:order="4" spirit:rangeType="long">8</spirit:value>
-      <spirit:vendorExtensions>
-        <xilinx:parameterInfo>
-          <xilinx:enablement>
-            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.C_S00_AXI_ADDR_WIDTH">false</xilinx:isEnabled>
-          </xilinx:enablement>
-        </xilinx:parameterInfo>
-      </spirit:vendorExtensions>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_S00_AXI_ADDR_WIDTH" spirit:order="4" spirit:minimum="8" spirit:maximum="11" spirit:rangeType="long">8</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_S00_AXI_BASEADDR</spirit:name>
@@ -1163,6 +1191,11 @@
       <spirit:name>Component_Name</spirit:name>
       <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">vga_drawrect_v1_0</spirit:value>
     </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>NUMBER_OF_RECTANGLES</spirit:name>
+      <spirit:displayName>Number Of Rectangles</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.NUMBER_OF_RECTANGLES" spirit:choiceRef="choice_list_96d47805">32</spirit:value>
+    </spirit:parameter>
   </spirit:parameters>
   <spirit:vendorExtensions>
     <xilinx:coreExtensions>
@@ -1172,21 +1205,25 @@
       <xilinx:taxonomies>
         <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
       </xilinx:taxonomies>
-      <xilinx:displayName>vga_drawrect_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>24</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2019-08-15T15:12:19Z</xilinx:coreCreationDateTime>
+      <xilinx:displayName>VGA Draw Rectangle</xilinx:displayName>
+      <xilinx:coreRevision>5</xilinx:coreRevision>
+      <xilinx:upgrades>
+        <xilinx:canUpgradeFrom>xilinx.com:user:vga_drawrect:1.0</xilinx:canUpgradeFrom>
+      </xilinx:upgrades>
+      <xilinx:coreCreationDateTime>2019-09-08T09:10:44Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="xilinx.com:user:vga_drawrect:1.0_ARCHIVE_LOCATION">d:/Vivado/DamianBrzezinski/ip_repo/vga_drawrect_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="xilinx.com:user:vga_drawrect:1.1_ARCHIVE_LOCATION">d:/Vivado/DamianBrzezinski/ip_repo/vga_drawrect_1.0</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2018.2</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="0312d308"/>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="b308c363"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="ed1368d5"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="d0df68e6"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="69ff1cba"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="f3d879df"/>
-      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="f4349b6c"/>
-      <xilinx:checksum xilinx:scope="parameters" xilinx:value="7b6c6fdb"/>
+      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="c66eb9ff"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="f9a0c3a3"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>
 </spirit:component>

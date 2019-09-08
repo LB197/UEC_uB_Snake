@@ -1,7 +1,7 @@
 
 `timescale 1 ns / 1 ps
 
-	module vga_background_v1_0_S00_AXI_BG #
+	module vga_drawrect_char_v1_0_S_AXI_CHAR_CTRL #
 	(
 		// Users to add parameters here
 
@@ -9,23 +9,37 @@
 		// Do not modify the parameters beyond this line
 
 		// Width of S_AXI data bus
-		parameter integer C_S_AXI_DATA_WIDTH	= 32,
+		parameter integer C_S_AXI_DATA_WIDTH	= 64,
 		// Width of S_AXI address bus
-		parameter integer C_S_AXI_ADDR_WIDTH	= 4
+		parameter integer C_S_AXI_ADDR_WIDTH	= 7
 	)
 	(
 		// Users to add ports here
-		input wire clk_40M,
-		input wire rst_40M,
-        output wire [11:0] hcount_out,
-        output wire [11:0] vcount_out,
-        output wire hblnk_out,
-        output wire vblnk_out,
-        output wire vsync_out,
-        output wire hsync_out,
-        output wire [3:0] r_out,
-        output wire [3:0] g_out,
-        output wire [3:0] b_out,
+        input wire clk_40M,
+        input wire rst_40M,
+        input wire [11:0] hcount_in,
+        input wire [11:0] vcount_in,
+        input wire hblnk_in,
+        input wire vblnk_in,
+        input wire vsync_in,
+        input wire hsync_in,
+        input wire [3:0] r_in,
+        input wire [3:0] g_in,
+        input wire [3:0] b_in,
+        input wire [7:0] char_pixel,
+        
+        output wire [7:0] char_xy,
+        output wire [3:0] char_line,
+        output reg [11:0] hcount_out,
+        output reg [11:0] vcount_out,
+        output reg hblnk_out,
+        output reg vblnk_out,
+        output reg vsync_out,
+        output reg hsync_out,
+        output reg [3:0] r_out,
+        output reg [3:0] g_out,
+        output reg [3:0] b_out,
+        
 		// User ports ends
 		// Do not modify the ports beyond this line
 
@@ -109,15 +123,19 @@
 	// ADDR_LSB = 2 for 32 bits (n downto 2)
 	// ADDR_LSB = 3 for 64 bits (n downto 3)
 	localparam integer ADDR_LSB = (C_S_AXI_DATA_WIDTH/32) + 1;
-	localparam integer OPT_MEM_ADDR_BITS = 1;
+	localparam integer OPT_MEM_ADDR_BITS = 3;
 	//----------------------------------------------
 	//-- Signals for user logic register space example
 	//------------------------------------------------
-	//-- Number of Slave Registers 4
+	//-- Number of Slave Registers 16
 	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg0;
 	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg1;
 	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg2;
 	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg3;
+	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg4;
+	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg5;
+	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg6;
+	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg7;
 	wire	 slv_reg_rden;
 	wire	 slv_reg_wren;
 	reg [C_S_AXI_DATA_WIDTH-1:0]	 reg_data_out;
@@ -234,44 +252,80 @@
 	      slv_reg1 <= 0;
 	      slv_reg2 <= 0;
 	      slv_reg3 <= 0;
+	      slv_reg4 <= 0;
+	      slv_reg5 <= 0;
+	      slv_reg6 <= 0;
+	      slv_reg7 <= 0;
 	    end 
 	  else begin
 	    if (slv_reg_wren)
 	      begin
 	        case ( axi_awaddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB] )
-	          2'h0:
+	          3'h0:
 	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
 	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
 	                // Respective byte enables are asserted as per write strobes 
 	                // Slave register 0
 	                slv_reg0[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
 	              end  
-	          2'h1:
+	          3'h1:
 	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
 	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
 	                // Respective byte enables are asserted as per write strobes 
 	                // Slave register 1
 	                slv_reg1[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
 	              end  
-	          2'h2:
+	          3'h2:
 	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
 	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
 	                // Respective byte enables are asserted as per write strobes 
 	                // Slave register 2
 	                slv_reg2[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
 	              end  
-	          2'h3:
+	          3'h3:
 	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
 	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
 	                // Respective byte enables are asserted as per write strobes 
 	                // Slave register 3
 	                slv_reg3[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
 	              end  
+	          3'h4:
+	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
+	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
+	                // Respective byte enables are asserted as per write strobes 
+	                // Slave register 4
+	                slv_reg4[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
+	              end  
+	          3'h5:
+	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
+	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
+	                // Respective byte enables are asserted as per write strobes 
+	                // Slave register 5
+	                slv_reg5[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
+	              end  
+	          3'h6:
+	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
+	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
+	                // Respective byte enables are asserted as per write strobes 
+	                // Slave register 6
+	                slv_reg6[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
+	              end  
+	          3'h7:
+	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
+	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
+	                // Respective byte enables are asserted as per write strobes 
+	                // Slave register 7
+	                slv_reg7[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
+	              end  
 	          default : begin
 	                      slv_reg0 <= slv_reg0;
 	                      slv_reg1 <= slv_reg1;
 	                      slv_reg2 <= slv_reg2;
 	                      slv_reg3 <= slv_reg3;
+	                      slv_reg4 <= slv_reg4;
+	                      slv_reg5 <= slv_reg5;
+	                      slv_reg6 <= slv_reg6;
+	                      slv_reg7 <= slv_reg7;
 	                    end
 	        endcase
 	      end
@@ -380,16 +434,20 @@
 	begin
 	      // Address decoding for reading registers
 	      case ( axi_araddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB] )
-	        2'h0   : reg_data_out <= slv_reg0;
-	        2'h1   : reg_data_out <= slv_reg1;
-	        2'h2   : reg_data_out <= slv_reg2;
-	        2'h3   : reg_data_out <= slv_reg3;
+	        4'h0   : reg_data_out <= slv_reg0;
+	        4'h1   : reg_data_out <= slv_reg1;
+	        4'h2   : reg_data_out <= slv_reg2;
+	        4'h3   : reg_data_out <= slv_reg3;
+	        4'h4   : reg_data_out <= slv_reg4;
+	        4'h5   : reg_data_out <= slv_reg5;
+	        4'h6   : reg_data_out <= slv_reg6;
+	        4'h7   : reg_data_out <= slv_reg7;
 	        default : reg_data_out <= 0;
 	      endcase
 	end
 
 	// Output register or memory read data
-    always @( posedge S_AXI_ACLK )
+	always @( posedge S_AXI_ACLK )
 	begin
 	  if ( S_AXI_ARESETN == 1'b0 )
 	    begin
@@ -408,84 +466,116 @@
 	end    
 
 	// Add user logic here
+	`define X_COORD 11:0
+	`define Y_COORD 23:12
+	`define WIDTH 35:24
+    //`define TEXT_EN 36
+	`define TEXT_ADDR 43:37
+	`define TEXT_COLOR 55:44
+	//`define TEXT_RES_DIS 56
+	`define TEXT_EN 56
+	
+    localparam FONT_HEIGHT = 12'd16;
+    localparam NumberOfObjects = 8;
     
-    wire [11:0] default_rgb_bg;
-    wire [0:0] image_bg;
-    wire [11:0] rgb_pixel [1:0];
-    wire img_rgb_ctrl;
-    reg [11:0] rgb_d;
-    assign default_rgb_bg = slv_reg0[11:0];
-    assign image_bg = slv_reg0[16:16];
-    assign img_rgb_ctrl = slv_reg0[24];
+    reg [11:0] hcount_temp, vcount_temp;
+    reg hsync_temp, vsync_temp, hblnk_temp, vblnk_temp;
+    reg [11:0] rgb_temp;
+    wire [11:0] vc, hc;
+    reg [56:0] select;
+    reg [14:0] select_temp;
+    wire result [0:NumberOfObjects-1];
+    reg [56:0] w_slv_reg [0:NumberOfObjects-1];
+    wire [11:0] rgb;
+    reg adisable_select, adisable_select_temp;
+    genvar r;
     
-    
-    //VGA_timing output wires
-    wire [11:0] vcount_vt, hcount_vt;
-    wire vsync_vt, hsync_vt;
-    wire vblnk_vt, hblnk_vt;
-    wire [9:0] pixel_addr;
-    
-    vga_timing my_timing (
-        .pclk(clk_40M),
-        .rst(rst_40M),
-        .vcount(vcount_vt),
-        .vsync(vsync_vt),
-        .vblnk(vblnk_vt),
-        .hcount(hcount_vt),
-        .hsync(hsync_vt),
-        .hblnk(hblnk_vt)
-    );
-    
-    // Draw_background output wires
-    wire [11:0] rgb_db;
-    
-    draw_background my_background (
-        .pclk(clk_40M),
-        .rst(rst_40M),
-        .vcount_in(vcount_vt),
-        .vsync_in(vsync_vt),
-        .vblnk_in(vblnk_vt),
-        .hcount_in(hcount_vt),
-        .hsync_in(hsync_vt),
-        .hblnk_in(hblnk_vt),
-        .rgb_bg(rgb_d),
-        .rgb_pixel(rgb_pixel[image_bg]),
-        .rgb_ctrl(img_rgb_ctrl),
-        
-        .vcount_out(vcount_out),
-        .vsync_out(vsync_out),
-        .vblnk_out(vblnk_out),
-        .hcount_out(hcount_out),
-        .hsync_out(hsync_out),
-        .hblnk_out(hblnk_out),
-        .rgb_out(rgb_db),
-        .pixel_addr(pixel_addr)
-    );
-    always @(posedge clk_40M)
-        if(rst_40M)
-            rgb_d <= 0;
-        else
-            rgb_d <= default_rgb_bg;
-            
-    
-    assign r_out = rgb_db[11:8];
-    assign g_out = rgb_db[7:4];
-    assign b_out = rgb_db[3:0];
-    
-    image_rom #(.WIDTH(32), .HEIGHT(32), .ADDR_WIDTH(10), .FILE("image_rom_grass32.data")) grass (
-        .clk(clk_40M),
-        .rst(rst_40M),
-        .address(pixel_addr),
-        .rgb(rgb_pixel[0])
-    );
-    
-    image_rom #(.WIDTH(32), .HEIGHT(32), .ADDR_WIDTH(10), .FILE("image_rom_grass32dark.data")) grass_dark (
-        .clk(clk_40M),
-        .rst(rst_40M),
-        .address(pixel_addr),
-        .rgb(rgb_pixel[1])
-    );
-    
-    // User logic ends
+    always @(posedge clk_40M) begin
+        w_slv_reg[0] <= slv_reg0[56:0];
+        w_slv_reg[1] <= slv_reg1[56:0];
+        w_slv_reg[2] <= slv_reg2[56:0];
+        w_slv_reg[3] <= slv_reg3[56:0];
+        w_slv_reg[4] <= slv_reg4[56:0];
+        w_slv_reg[5] <= slv_reg5[56:0];
+        w_slv_reg[6] <= slv_reg6[56:0];
+        w_slv_reg[7] <= slv_reg7[56:0];
+        end
 
-endmodule
+    
+    always @(posedge clk_40M)
+        if(rst_40M) begin
+            hsync_out <= 0;
+            vsync_out <= 0;
+            hblnk_out <= 0;
+            vblnk_out <= 0;
+            hcount_out <= 0;
+            vcount_out <= 0;
+            r_out <= 0;
+            g_out <= 0;
+            b_out <= 0;
+            
+            hsync_temp <= 0;
+            vsync_temp <= 0;
+            hblnk_temp <= 0;
+            vblnk_temp <= 0;
+            hcount_temp <= 0;
+            vcount_temp <= 0;
+            rgb_temp <= 0;
+            select_temp <= 0;
+            adisable_select_temp <= 0;
+            end
+        else begin
+            hcount_out <= hcount_temp;
+            vcount_out <= vcount_temp;
+            hsync_out <= hsync_temp;
+            vsync_out <= vsync_temp;
+            hblnk_out <= hblnk_temp;
+            vblnk_out <= vblnk_temp;
+            b_out <= rgb[3:0];
+            g_out <= rgb[7:4];
+            r_out <= rgb[11:8];
+            
+            adisable_select_temp <= adisable_select;
+            hcount_temp <= hcount_in;
+            vcount_temp <= vcount_in;
+            hsync_temp <= hsync_in;
+            vsync_temp <= vsync_in;
+            hblnk_temp <= hblnk_in;
+            vblnk_temp <= vblnk_in;
+            rgb_temp <= {r_in, g_in, b_in};
+            select_temp[2:0] <= select[2:0];
+            select_temp[14:3] <= select[`TEXT_COLOR];
+            end
+    
+    always @* begin
+        adisable_select = 1;
+        select = 57'b0;
+        if(result[0]) select = w_slv_reg[0];
+        else if(result[1]) select = w_slv_reg[1];
+        else if(result[2]) select = w_slv_reg[2];
+        else if(result[3]) select = w_slv_reg[3];
+        else if(result[4]) select = w_slv_reg[4];
+        else if(result[5]) select = w_slv_reg[5];
+        else if(result[6]) select = w_slv_reg[6];
+        else if(result[7]) select = w_slv_reg[7];              
+        else begin
+            adisable_select = 0;
+            end
+        end
+        
+    generate
+        for(r = 0; r < NumberOfObjects; r = r + 1) begin
+           assign result[r] = (w_slv_reg[r][`TEXT_EN] && hcount_in >= w_slv_reg[r][`X_COORD] && hcount_in < w_slv_reg[r][`X_COORD] + w_slv_reg[r][`WIDTH] && vcount_in >= w_slv_reg[r][`Y_COORD] && vcount_in < w_slv_reg[r][`Y_COORD] + FONT_HEIGHT) ? 1 : 0;
+           end
+    endgenerate
+    
+    assign vc = vcount_in - select[`Y_COORD];
+    assign hc = hcount_in - select[`X_COORD];
+    
+    assign char_xy = {vc[7:4], hc[6:3]} + select[`TEXT_ADDR];
+    assign char_line = vc[3:0];
+    assign rgb = (adisable_select_temp && char_pixel[~(hcount_temp[2:0] - select_temp[2:0])]) ? select_temp[14:3] : rgb_temp; 
+
+	// User logic ends
+
+	endmodule

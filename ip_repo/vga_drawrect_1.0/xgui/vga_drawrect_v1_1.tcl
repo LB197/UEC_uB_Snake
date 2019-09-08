@@ -10,6 +10,8 @@ proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "C_S00_AXI_BASEADDR" -parent ${Page_0}
   ipgui::add_param $IPINST -name "C_S00_AXI_HIGHADDR" -parent ${Page_0}
 
+  set NUMBER_OF_RECTANGLES [ipgui::add_param $IPINST -name "NUMBER_OF_RECTANGLES" -widget comboBox]
+  set_property tooltip {Maximum number of rectangles possible. Must change ADDR WIDTH to be at least 3 + log2(number of rectangles) wide!} ${NUMBER_OF_RECTANGLES}
 
 }
 

@@ -11,7 +11,7 @@
 		// Width of S_AXI data bus
 		parameter integer C_S_AXI_DATA_WIDTH	= 32,
 		// Width of S_AXI address bus
-		parameter integer C_S_AXI_ADDR_WIDTH	= 5
+		parameter integer C_S_AXI_ADDR_WIDTH	= 4
 	)
 	(
 		// Users to add ports here
@@ -121,19 +121,15 @@
 	// ADDR_LSB = 2 for 32 bits (n downto 2)
 	// ADDR_LSB = 3 for 64 bits (n downto 3)
 	localparam integer ADDR_LSB = (C_S_AXI_DATA_WIDTH/32) + 1;
-	localparam integer OPT_MEM_ADDR_BITS = 2;
+	localparam integer OPT_MEM_ADDR_BITS = 1;
 	//----------------------------------------------
 	//-- Signals for user logic register space example
 	//------------------------------------------------
-	//-- Number of Slave Registers 8
+	//-- Number of Slave Registers 4
 	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg0;
 	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg1;
 	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg2;
 	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg3;
-	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg4;
-	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg5;
-	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg6;
-	reg [C_S_AXI_DATA_WIDTH-1:0]	slv_reg7;
 	wire	 slv_reg_rden;
 	wire	 slv_reg_wren;
 	reg [C_S_AXI_DATA_WIDTH-1:0]	 reg_data_out;
@@ -246,83 +242,48 @@
 	begin
 	  if ( S_AXI_ARESETN == 1'b0 )
 	    begin
+          //slv_reg0 <= 0;
 	      slv_reg1 <= 0;
 	      slv_reg2 <= 0;
 	      slv_reg3 <= 0;
-	      slv_reg4 <= 0;
-	      slv_reg5 <= 0;
-	      slv_reg6 <= 0;
-	      slv_reg7 <= 0;
 	    end 
 	  else begin
 	    if (slv_reg_wren)
 	      begin
 	        case ( axi_awaddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB] )
-//	          3'h0:
+//	          2'h0:
 //	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
 //	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
 //	                // Respective byte enables are asserted as per write strobes 
 //	                // Slave register 0
 //	                slv_reg0[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
 //	              end  
-	          3'h1:
+	          2'h1:
 	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
 	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
 	                // Respective byte enables are asserted as per write strobes 
 	                // Slave register 1
 	                slv_reg1[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
 	              end  
-	          3'h2:
+	          2'h2:
 	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
 	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
 	                // Respective byte enables are asserted as per write strobes 
 	                // Slave register 2
 	                slv_reg2[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
 	              end  
-	          3'h3:
+	          2'h3:
 	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
 	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
 	                // Respective byte enables are asserted as per write strobes 
 	                // Slave register 3
 	                slv_reg3[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
 	              end  
-	          3'h4:
-	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
-	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
-	                // Respective byte enables are asserted as per write strobes 
-	                // Slave register 4
-	                slv_reg4[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
-	              end  
-	          3'h5:
-	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
-	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
-	                // Respective byte enables are asserted as per write strobes 
-	                // Slave register 5
-	                slv_reg5[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
-	              end  
-	          3'h6:
-	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
-	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
-	                // Respective byte enables are asserted as per write strobes 
-	                // Slave register 6
-	                slv_reg6[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
-	              end  
-	          3'h7:
-	            for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
-	              if ( S_AXI_WSTRB[byte_index] == 1 ) begin
-	                // Respective byte enables are asserted as per write strobes 
-	                // Slave register 7
-	                slv_reg7[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
-	              end  
 	          default : begin
 //	                      slv_reg0 <= slv_reg0;
 	                      slv_reg1 <= slv_reg1;
 	                      slv_reg2 <= slv_reg2;
 	                      slv_reg3 <= slv_reg3;
-	                      slv_reg4 <= slv_reg4;
-	                      slv_reg5 <= slv_reg5;
-	                      slv_reg6 <= slv_reg6;
-	                      slv_reg7 <= slv_reg7;
 	                    end
 	        endcase
 	      end
@@ -431,14 +392,10 @@
 	begin
 	      // Address decoding for reading registers
 	      case ( axi_araddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB] )
-	        3'h0   : reg_data_out <= slv_reg0;
-	        3'h1   : reg_data_out <= slv_reg1;
-	        3'h2   : reg_data_out <= slv_reg2;
-	        3'h3   : reg_data_out <= slv_reg3;
-	        3'h4   : reg_data_out <= slv_reg4;
-	        3'h5   : reg_data_out <= slv_reg5;
-	        3'h6   : reg_data_out <= slv_reg6;
-	        3'h7   : reg_data_out <= slv_reg7;
+	        2'h0   : reg_data_out <= slv_reg0;
+	        2'h1   : reg_data_out <= slv_reg1;
+	        2'h2   : reg_data_out <= slv_reg2;
+	        2'h3   : reg_data_out <= slv_reg3;
 	        default : reg_data_out <= 0;
 	      endcase
 	end
@@ -466,24 +423,25 @@
 	wire [11:0] xpos, ypos;
 	wire PS2_LMB;
 	reg [11:0] xpos_sync, ypos_sync;
+	reg LMB_temp1, LMB_temp2;
+	
     MouseCtl my_PS2mouse(
-    
-    .clk(S_AXI_ACLK),
-    .rst(!S_AXI_ARESETN),
-    .xpos(xpos),
-    .ypos(ypos),
-    .zpos(),
-    .left(PS2_LMB),
-    .middle(),
-    .right(),
-    .new_event(),
-    .value(0),
-    .setx(0),
-    .sety(0),
-    .setmax_x(0),
-    .setmax_y(0),
-    .ps2_clk(ps2_clk),
-    .ps2_data(ps2_data)
+        .clk(S_AXI_ACLK),
+        .rst(!S_AXI_ARESETN),
+        .xpos(xpos),
+        .ypos(ypos),
+        .zpos(),
+        .left(PS2_LMB),
+        .middle(),
+        .right(),
+        .new_event(),
+        .value(12'b0),
+        .setx(1'b0),
+        .sety(1'b0),
+        .setmax_x(1'b0),
+        .setmax_y(1'b0),
+        .ps2_clk(ps2_clk),
+        .ps2_data(ps2_data)
     );
 	
 	always @(posedge clk_40M)
@@ -491,32 +449,30 @@
 	       xpos_sync <= 0;
 	       ypos_sync <= 0;
 	   end
-	   
 	   else begin
 	       xpos_sync <= xpos;
 	       ypos_sync <= ypos;
 	   end
 	       
-	
     MouseDisplay my_MouseDisplay(
     
-    .pixel_clk(clk_40M),
-    .xpos(xpos_sync),    
-    .ypos(ypos_sync), 
-                   
-    .hcount(hcount_in),   
-    .vcount(vcount_in),   
-    .blank(hblnk_in||vblnk_in),
+        .pixel_clk(clk_40M),
+        .xpos(xpos_sync),    
+        .ypos(ypos_sync), 
+                       
+        .hcount(hcount_in),   
+        .vcount(vcount_in),   
+        .blank(hblnk_in||vblnk_in),
+                      
+        .red_in(r_in),   
+        .green_in(g_in), 
+        .blue_in(b_in),
                   
-    .red_in(r_in),   
-    .green_in(g_in), 
-    .blue_in(b_in),
-              
-    .enable_mouse_display_out(),
-            
-    .red_out(r_out),  
-    .green_out(g_out),
-    .blue_out(b_out)
+        .enable_mouse_display_out(),
+                
+        .red_out(r_out),  
+        .green_out(g_out),
+        .blue_out(b_out)
      
      );
      
@@ -532,33 +488,46 @@
         else begin
             hcount_out <= hcount_in;
             vcount_out <= vcount_in;
-            hblnk_out <=  hblnk_in;
-            vblnk_out <=  vblnk_in;
-            vsync_out <=  vsync_in;
-            hsync_out <=  hsync_in;
+            hblnk_out <= hblnk_in;
+            vblnk_out <= vblnk_in;
+            vsync_out <= vsync_in;
+            hsync_out <= hsync_in;
         end 
     
     always @(posedge  S_AXI_ACLK)
-    if(!S_AXI_ARESETN) 
-        slv_reg0 <= 0;
-    else
-        if(PS2_LMB) begin
-            slv_reg0[23:0] <= {ypos, xpos};
-        end
+        if( S_AXI_ARESETN == 1'b0 ) 
+            slv_reg0 <= 0;
         else
-            slv_reg0 <= slv_reg0;
+            if(PS2_LMB) begin
+                slv_reg0[23:0] <= {ypos, xpos};
+                slv_reg0[31:24] <= slv_reg0[31:24];
+            end
+            else
+                slv_reg0 <= slv_reg0;
   
     always @(posedge S_AXI_ACLK)
-        if (!S_AXI_ARESETN)
+        if ( S_AXI_ARESETN == 1'b0 )
             LMB_int <= 0;
         else
-            if(PS2_LMB)
+            if(!LMB_temp1 && LMB_temp2)
                 LMB_int <= 1'b1;
             else
-                if (slv_reg_wren && (axi_awaddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB] == 3'h3))
+                if (slv_reg_wren && (axi_awaddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB] == 2'h0))
                     LMB_int <= 1'b0;
                 else
                     LMB_int <= LMB_int;
+                    
+    always @(posedge S_AXI_ACLK)
+        if( S_AXI_ARESETN == 1'b0 ) begin
+            LMB_temp1 <= 0;
+            LMB_temp2 <= 0;
+            end
+        else begin
+            LMB_temp1 <= PS2_LMB;
+            LMB_temp2 <= LMB_temp1;
+            end
+                
+            
                    
 	// User logic ends
 
