@@ -11,14 +11,14 @@
 // using Verilog-2001 syntax.
 
 module vga_timing (
+  input wire pclk,
+  input wire rst,
   output reg [11:0] vcount,
   output wire vsync,
   output wire vblnk,
   output reg [11:0] hcount,
   output wire hsync,
-  output wire hblnk,
-  input wire pclk,
-  input wire rst
+  output wire hblnk
   );
     
     localparam H_TOTAL_TIME = 1056;

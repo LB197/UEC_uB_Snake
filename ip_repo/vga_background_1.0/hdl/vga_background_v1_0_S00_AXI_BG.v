@@ -389,7 +389,7 @@
 	end
 
 	// Output register or memory read data
-	always @( posedge S_AXI_ACLK )
+    always @( posedge S_AXI_ACLK )
 	begin
 	  if ( S_AXI_ARESETN == 1'b0 )
 	    begin
@@ -408,27 +408,84 @@
 	end    
 
 	// Add user logic here
-	
-	wire [11:0] rgb_slv;
-	
-	assign rgb_slv = slv_reg0[11:0];
-	
-    vga_example vga_core(
+    
+    wire [11:0] default_rgb_bg;
+    wire [0:0] image_bg;
+    wire [11:0] rgb_pixel [1:0];
+    wire img_rgb_ctrl;
+    reg [11:0] rgb_d;
+    assign default_rgb_bg = slv_reg0[11:0];
+    assign image_bg = slv_reg0[16:16];
+    assign img_rgb_ctrl = slv_reg0[24];
+    
+    
+    //VGA_timing output wires
+    wire [11:0] vcount_vt, hcount_vt;
+    wire vsync_vt, hsync_vt;
+    wire vblnk_vt, hblnk_vt;
+    wire [9:0] pixel_addr;
+    
+    vga_timing my_timing (
         .pclk(clk_40M),
         .rst(rst_40M),
-        .rgb(rgb_slv),
-        
-        .hcount(hcount_out),
-        .vcount(vcount_out),
-        .hblnk(hblnk_out),
-        .vblnk(vblnk_out),
-        .vsync(vsync_out),
-        .hsync(hsync_out),
-        .r(r_out),
-        .g(g_out),
-        .b(b_out)
-    
+        .vcount(vcount_vt),
+        .vsync(vsync_vt),
+        .vblnk(vblnk_vt),
+        .hcount(hcount_vt),
+        .hsync(hsync_vt),
+        .hblnk(hblnk_vt)
     );
-	// User logic ends
+    
+    // Draw_background output wires
+    wire [11:0] rgb_db;
+    
+    draw_background my_background (
+        .pclk(clk_40M),
+        .rst(rst_40M),
+        .vcount_in(vcount_vt),
+        .vsync_in(vsync_vt),
+        .vblnk_in(vblnk_vt),
+        .hcount_in(hcount_vt),
+        .hsync_in(hsync_vt),
+        .hblnk_in(hblnk_vt),
+        .rgb_bg(rgb_d),
+        .rgb_pixel(rgb_pixel[image_bg]),
+        .rgb_ctrl(img_rgb_ctrl),
+        
+        .vcount_out(vcount_out),
+        .vsync_out(vsync_out),
+        .vblnk_out(vblnk_out),
+        .hcount_out(hcount_out),
+        .hsync_out(hsync_out),
+        .hblnk_out(hblnk_out),
+        .rgb_out(rgb_db),
+        .pixel_addr(pixel_addr)
+    );
+    always @(posedge clk_40M)
+        if(rst_40M)
+            rgb_d <= 0;
+        else
+            rgb_d <= default_rgb_bg;
+            
+    
+    assign r_out = rgb_db[11:8];
+    assign g_out = rgb_db[7:4];
+    assign b_out = rgb_db[3:0];
+    
+    image_rom #(.WIDTH(32), .HEIGHT(32), .ADDR_WIDTH(10), .FILE("image_rom_grass32.data")) grass (
+        .clk(clk_40M),
+        .rst(rst_40M),
+        .address(pixel_addr),
+        .rgb(rgb_pixel[0])
+    );
+    
+    image_rom #(.WIDTH(32), .HEIGHT(32), .ADDR_WIDTH(10), .FILE("image_rom_grass32dark.data")) grass_dark (
+        .clk(clk_40M),
+        .rst(rst_40M),
+        .address(pixel_addr),
+        .rgb(rgb_pixel[1])
+    );
+    
+    // User logic ends
 
-	endmodule
+endmodule
