@@ -1,0 +1,31 @@
+{
+   ExpandedHierarchyInLayout: "",
+   guistr: "# # String gsaved with Nlview 6.8.5  2018-01-30 bk=1.4354 VDI=40 GEI=35 GUI=JA:1.6 non-TLS
+#  -string -flagsOSRD
+preplace port LMB_Clk -pg 1 -y 70 -defaultsOSRD
+preplace port ILMB -pg 1 -y 230 -defaultsOSRD
+preplace port AXI_Rst -pg 1 -y 370 -defaultsOSRD
+preplace port DLMB -pg 1 -y 50 -defaultsOSRD
+preplace port AXI_Clk -pg 1 -y 350 -defaultsOSRD
+preplace port SYS_Rst -pg 1 -y 90 -defaultsOSRD
+preplace port S_AXI_BRAM_CTRL -pg 1 -y 330 -defaultsOSRD
+preplace inst dlmb_bram_if_cntlr -pg 1 -lvl 2 -y 140 -defaultsOSRD
+preplace inst lmb_bram -pg 1 -lvl 3 -y 150 -defaultsOSRD
+preplace inst ilmb_v10 -pg 1 -lvl 1 -y 250 -defaultsOSRD
+preplace inst axi_bram_ctrl_0 -pg 1 -lvl 2 -y 350 -defaultsOSRD
+preplace inst dlmb_v10 -pg 1 -lvl 1 -y 70 -defaultsOSRD
+preplace netloc S_AXI_BRAM_CTRL_1 1 0 2 NJ 330 N
+preplace netloc microblaze_0_dlmb 1 0 1 NJ
+preplace netloc SYS_Rst_1 1 0 2 20 170 NJ
+preplace netloc axi_bram_ctrl_0_BRAM_PORTA 1 2 1 820
+preplace netloc microblaze_0_Clk 1 0 2 30 150 NJ
+preplace netloc microblaze_0_dlmb_cntlr 1 2 1 N
+preplace netloc AXI_Rst_1 1 0 2 NJ 370 N
+preplace netloc AXI_Clk_1 1 0 2 NJ 350 N
+preplace netloc microblaze_0_ilmb 1 0 1 NJ
+preplace netloc microblaze_0_dlmb_bus 1 1 1 520
+preplace netloc Conn 1 1 1 520
+levelinfo -pg 1 0 410 680 950 1090 -top -180 -bot 450
+",
+}
+
