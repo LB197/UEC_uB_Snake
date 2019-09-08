@@ -1,0 +1,10 @@
+
+
+OPTION psf_version = 2.1;
+
+BEGIN DRIVER vga_drawrect_char
+	OPTION supported_peripherals = (vga_drawrect_char);
+	OPTION copyfiles = all;
+	OPTION VERSION = 1.0;
+	OPTION NAME = vga_drawrect_char;
+END DRIVER
